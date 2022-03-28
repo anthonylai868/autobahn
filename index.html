@@ -1,0 +1,491 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <title>Autobahn</title>
+</head>
+  <body>
+    <!-- navigation bar -->
+    <nav class="navbar is-transparent is-black">
+        <div class="navbar-brand">
+          <a id="logo" class="navbar-item">
+            <img src="images/logo1.png" alt="Autobahn" height="120" width="160">
+          </a>
+          <a class="navbar-burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
+
+        <div id="navbar" class="navbar-menu has-background-black is-mobile">
+          <div class="navbar-start">
+            <a id="home" class="navbar-item has-text-white p-4">
+              Home
+            </a>
+            <a id="aboutus" class="navbar-item has-text-white p-4">
+              About Us
+            </a>
+            <a id="listingslink" class="loggedin navbar-item has-text-white p-4">
+              All Listings
+            </a>
+            <a id="myListings" class="loggedin navbar-item has-text-white p-4">
+              My Listings
+            </a>
+            <div class="loggedin navbar-item">
+              <p class="p-1">
+                <input class="input is-focused" id="search_box" placeholder="Search by model here"/>
+              </p>
+              <p class="p-1">
+                <button class="button" value="Search" id="search_button">Search</button>
+              </p>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <p id="welcome" class="loggedin has-text-white is-left"></p>
+            </div>
+            <div class="navbar-item">
+              <p id="message" class="loggedout has-text-danger is-left"></p>
+            </div>
+            <div class="navbar-item">
+              <div class="buttons">
+ 
+
+            <!-- post a listing button-->
+                <div class="modal is-centered-mobile" id="listingmodal">
+                  <div class="modal-background" id="listingbg"></div>
+                  <div class="modal-content p-6 has-background-white">
+                      <h1 class="is-size-3 title has-text-centered">Post Your Car!</h1>
+                      <h1 class="subtitle has-text-centered">(Please fill out all fields)</h3>
+                      <form id="listingform">
+
+                          <!-- Phone -->
+                          <div class="field">
+                              <label class="label">Phone</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="tel" placeholder="(608)-555-5555" id="listingPhone">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-phone-alt"></i>
+                                </span>
+                            </div>
+                          </div>
+
+                          <!-- Make -->
+                          <div class="field">
+                              <label class="label">Make</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="BMW" id="listingMake">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-car"></i>
+                                </span>
+                            </div>
+                          </div>
+
+                          <!-- Model -->
+                          <div class="field">
+                            <label class="label">Model</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="E46 325ix" id="listingModel">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-car"></i>
+                              </span>
+                            </div>
+                          </div>
+
+                          <!-- body style -->
+                            <div class="field">
+                              <label class="label">Body Style</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="Coupe" id="listingBody">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-car-side"></i>
+                                </span>
+                              </div>
+                            </div>
+
+                          <!-- engine -->
+                          <div class="field">
+                            <label class="label">Engine</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="2.5 Liter Inline Six" id="listingEngine">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-cogs"></i>
+                              </span>
+                            </div>
+                          </div>
+
+                          <!-- transmission -->
+                          <div class="field">
+                            <label class="label">Transmission</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="6 Speed Manual" id="listingTrans">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-cogs"></i>
+                              </span>
+                            </div>
+                          </div>
+
+                        <!-- drive -->
+                          <div class="field">
+                            <label class="label">Drive</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="All Wheel Drive" id="listingDrive">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-cogs"></i>
+                              </span>
+                            </div>
+                          </div>
+
+                          <!-- Year -->
+                          <div class="field">
+                            <label class="label">Year</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="2002" id="listingYear">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-calendar-alt"></i>
+                              </span>
+                            </div>
+                          </div>
+
+                          <!-- Mileage -->
+                          <div class="field">
+                            <label class="label">Mileage</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="123,456" id="listingMileage">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-tachometer-alt"></i>
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <!-- Exterior -->
+                            <div class="field pt-4">
+                              <label class="label">Exterior Color</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="Black" id="listingExColor">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-palette"></i>
+                                </span>
+                            </div>
+                          </div>
+
+                            <!-- Interior -->
+                            <div class="field">
+                              <label class="label">Interior Color</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="Black" id="listingIntColor">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-palette"></i>
+                                </span>
+                            </div>
+                          </div>
+
+                            <!-- listing price -->
+                            <div class="field">
+                              <label class="label">Price (Please don't include dollar sign at the beginning)</label>
+                              <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="12,345" id="listingPrice">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-dollar-sign"></i>
+                                </span>
+                            </div>
+                          </div>
+
+                          <!-- Message box -->
+                          <div class="field">
+                              <label class="label">Description</label>
+                              <div class="control">
+                                  <textarea class="textarea" id="listingDesc" placeholder="Use this space to describe your vehicle or to let people know other special features/qualities of your car!"></textarea>
+                              </div>
+                          </div>
+
+                          <!-- upload image -->
+                          <div class="field">
+                            <label class="label">Image (A resolution of at least 900x600 is reccomended)</label>
+                            <div class="control">
+                             <input class = "input" type = "file" id="listing_image" placeholder = "Choose Image" >
+                            </div>
+                          </div>
+
+                          <!-- verify checkbox -->
+
+                          <label class="checkbox has-text-black pb-5 pt-2">
+                            <input type="checkbox" id="verify">
+                          I certify the information I have provided is exactly as described
+                          </label>
+
+                          <!-- submit -->
+                          <div class="field">
+                              <div class="control">
+                                  <button class="button is-link">Submit</button>
+                              </div>
+                          </div>
+
+                      </form>
+                  </div>
+              </div>
+              <div class="loggedin">
+              <a class="button is-primary mx-2" id="listingbutton">
+                Post a Listing
+              </a>
+              </div>
+
+              <!-- sign in/sign up button-->
+              <div class="modal" id="signupmodal">
+                <div class="modal-background" id="signupbg"></div>
+                <div class="modal-content p-6 has-background-white">
+                  <div class="columns">
+
+                    <!-- sign in form -->
+                    <div class="column is-6">
+                    <h1 class="is-size-3 title">Sign In</h1>
+                    <form id="signInForm">
+
+                        <!-- Email -->
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="email" id="email">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="field">
+                          <label class="label">Password</label>
+                          <div class="control has-icons-left">
+                              <input class="input" type="password" id="password">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                              </span>
+                          </div>
+                      </div>
+
+                        <!-- submit -->
+                        <div class="field">
+                            <div class="control has-text-left">
+                                <button class="button is-link is-left">Sign In</button>
+                            </div>
+                          </div>
+
+                        <!-- div error -->
+                        <div class="error has-text-danger" id="signInError">
+
+                        </div>
+                        </form>
+                        </div>
+
+                      <!-- Sign Up Form -->
+                      <div class="column is-6">
+                        <h1 class="is-size-3 title">Sign Up</h1>
+                        <form id="signUpForm">
+    
+                            <!-- Email -->
+                            <div class="field">
+                              <label class="label">Email</label>
+                              <div class="control has-icons-left">
+                                  <input class="input" type="email" id="email_">
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                              </div>
+                          </div>
+
+                            <!-- Password -->
+                            <div class="field">
+                              <label class="label">Password</label>
+                              <div class="control has-icons-left">
+                                  <input class="input" type="password" id="password_">
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                  </span>
+                              </div>
+                          </div>
+    
+                            <!-- submit -->
+                            <div class="field">
+                                <div class="control has-text-left">
+                                    <button class="button is-link is-left">Sign Up</button>
+                                </div>
+                            </div>
+                            <!-- div error -->
+                            <div class="error has-text-danger" id="signUpError">
+
+                            </div>
+                            </form>
+                          </div>
+                  </div>
+                </div>
+            </div>
+              <div class="loggedout">
+                <a class="button is-link" id="signinbtn">
+                  Sign Up/Sign In
+                </a>
+              </div>
+              <div class="loggedin">
+                <a class="button is-danger" id="signoutbtn">
+                  Sign Out
+                </a>
+              </div>
+              </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- body -->
+    <div id="main">
+        <div id="body">
+        </div>
+        <div id="content">
+            <figure class="image">
+                <img src="images/mercedes1.jpg">
+              </figure>
+        </div>
+    </div>
+
+       <!-- tabbed content -->
+       <div class="tabs is-boxed is-fullwidth link-active-black is-centered">
+         <ul>
+           <li class="is-active is-black" data-target="follow-us">
+             <a class="has-text-grey-light">Follow Us</a>
+           </li>
+           <li data-target="contactus">
+            <a class="has-text-grey-light">Contact Us</a>
+          </li>
+         </ul>
+       </div>
+
+       <!-- tabs -->
+       <div class="has-background-white" id="tab-content">
+
+         <!-- follow us tab -->
+          <div id="follow-us">
+            <div id="content has-text-centered">
+            <div class="has-background-white py-4">
+              <div class="content has-text-centered">
+              <a class="has-text-black" href="http://www.facebook.com"><i class="ml-2 fab fa-2x fa-facebook"></i></a>
+              <a class="has-text-black pl-5" href="http://www.twitter.com"><i class="ml-2 fab fa-2x fa-twitter"></i></a>
+              <a class="has-text-black pl-5" href="http://www.instagram.com"><i class="ml-2 fab fa-2x fa-instagram"></i></a>
+              <a class="has-text-black pl-5" href="http://www.tiktok.com"><i class="ml-2 fab fa-2x fa-tiktok"></i></a>
+              <a class="has-text-black pl-5" href="http://www.youtube.com"><i class="ml-2 fab fa-2x fa-youtube"></i></a>
+              </div>
+          </div>
+          </div>
+        </div>
+
+          <!-- contact us tab -->
+          <div id="contactus" class="is-hidden">
+              <div class="container">
+                  <div class="columns">
+                      <div class="column is-1">
+                      </div>
+                      <!-- main content -->
+                      <div class="column is-10  p-6">
+                          <h1 class="is-size-3 has-text-centered"> Contact Us! </h1>
+                          <form id="contactForm">
+                          <!-- name box -->
+                          <div class="field">
+                              <label class="label px-6 pt-6 has-text-black">Name:</label>
+                              <div class="control px-6">
+                                <input class="input" type="text" placeholder="John Smith" size=2 id="contactName">
+                              </div>
+                            </div>
+                            <!-- email box -->
+                            <div class="field">
+                              <label class="label px-6 has-text-black">Email:</label>
+                              <div class="control px-6">
+                                <input class="input" type="email" placeholder="notarealemail@email.com" id="contactEmail">
+                              </div>
+                            </div>
+                          <!-- inquiry box -->
+                                <div class="field">
+                                    <label class="label px-6 pt-4 has-text-black">Inquiry:</label>
+                                    <div class="control px-6">
+                                        <textarea class="textarea" placeholder="Type your inquiry here!" id="contactInquiry"></textarea>
+                                    </div>
+                                </div>
+                              <div class="control px-6 py-4">
+                                <button class="button is-primary">Submit</button>
+                              </div>
+                            </form>
+                          <p class="mt-2 px-6 has-text-left">Inquiries will typically take no longer than 24 hours to receive a reply from one of our representatives.
+                          </p>
+                          <p class="mt-2 px-6 has-text-left">If the inquiry is urgent, do not hesitate to call us at (608)-555-5555 during operating hours.  
+                          </p>
+                        </div>
+                      </div>
+                      <div class="column is-1">
+                      </div>
+                  </div>
+              </div>
+          </div>
+       </div>
+       
+
+       <!-- footer -->
+       
+       <div class="footer has-background-black">
+        <div class="columns">
+          <div class="column">
+            <div class="content has-text-right has-text-centered-mobile pt-4">
+            <img src="images/logo1.png" alt="White E30" height="400" width="300">
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-left has-text-centered-mobile">
+              <p class="has-text-white">Copyright &copy; 2021 Autobahn LLC</p>
+              <p class="has-text-white"><a class="has-text-white">alai9@wisc.edu</a> | (608)-555-5555</p>
+              <p class="has-text-white">University of Wisconsin-Madison, IS371</p>
+           </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- core Firebase JS SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+        
+        <!-- authentication SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+        <!-- firestore SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+        <!-- storage SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+        <script>
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyDTBAwj-gID47Wrp67375A5b6RQiVyToCc",
+            authDomain: "milestone2spa-147a2.firebaseapp.com",
+            projectId: "milestone2spa-147a2",
+            storageBucket: "milestone2spa-147a2.appspot.com",
+            messagingSenderId: "527895326115",
+            appId: "1:527895326115:web:2d7ed9f700b950e9193e16"
+          };
+
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+
+          // define SDK variables
+          let auth = firebase.auth();
+          let db = firebase.firestore();
+          let ref = firebase.storage().ref();
+
+        </script>
+
+       <script src="index.js"></script>
+
+  </body>
+</html> 
